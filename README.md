@@ -6,6 +6,10 @@ React + TypeScript application for rendering mocked cards and transactions, with
 
 - https://drive.google.com/drive/u/0/folders/1XuJ_a4f3QA15ve9qf4TUXzsXY0oajS7b
 
+## Screenshot
+
+![Cards & Transactions UI](./docs/screenshots/cards-overview.png)
+
 ## Tech Stack
 
 - Framework: React 19 (function components + hooks)

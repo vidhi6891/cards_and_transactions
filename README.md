@@ -138,6 +138,9 @@ npm run test:e2e -- tests/e2e/cards-overview.visual.spec.ts --update-snapshots
 - Move filtering/sorting/pagination to the backend for large datasets and predictable latency.
 - Move theming to backend-owned design tokens so each card has one canonical color identity across clients and the frontend no longer owns color-generation logic.
 - Add URL-synced filter state for shareable views and better back/forward navigation.
+- Introduce Redux Toolkit (with RTK Query) when cross-feature shared state and server-cache complexity justify global state management.
+- Extract draft + debounced-commit filter behavior into a reusable shared hook for consistency across forms.
+- Introduce icon/animation libraries (for example `lucide-react`, `framer-motion`) once UI complexity justifies shared icon/motion systems.
 - Extend filtering with date range + transaction type + saved filter presets.
 - Add explicit filter validation (invalid numeric input, min/max conflicts) with inline and screen-reader-friendly error messaging.
 - Improve export for larger datasets (server-generated CSV, background job, status feedback).

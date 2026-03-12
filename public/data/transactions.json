@@ -1,0 +1,494 @@
+{
+  "lkmfkl-mlfkm-dlkfm": [
+    {
+      "id": "tx-pe-01",
+      "amount": 38.5,
+      "description": "Groceries",
+      "date": "2026-01-03"
+    },
+    {
+      "id": "tx-pe-02",
+      "amount": 14.2,
+      "description": "Coffee Beans",
+      "date": "2026-01-06"
+    },
+    {
+      "id": "tx-pe-03",
+      "amount": 62.9,
+      "description": "Fuel",
+      "date": "2026-01-09"
+    },
+    {
+      "id": "tx-pe-04",
+      "amount": 21.4,
+      "description": "Pharmacy",
+      "date": "2026-01-12"
+    },
+    {
+      "id": "tx-pe-05",
+      "amount": 129.0,
+      "description": "Home Supplies",
+      "date": "2026-01-15"
+    },
+    {
+      "id": "tx-pe-06",
+      "amount": -12.0,
+      "description": "Store Credit",
+      "date": "2026-01-17"
+    },
+    {
+      "id": "tx-pe-07",
+      "amount": 55.75,
+      "description": "Dinner",
+      "date": "2026-01-20"
+    },
+    {
+      "id": "tx-pe-08",
+      "amount": 18.6,
+      "description": "Bakery",
+      "date": "2026-01-23"
+    },
+    {
+      "id": "tx-pe-09",
+      "amount": 97.3,
+      "description": "Utilities",
+      "date": "2026-01-26"
+    },
+    {
+      "id": "tx-pe-10",
+      "amount": 43.8,
+      "description": "Ride Share",
+      "date": "2026-01-29"
+    },
+    {
+      "id": "tx-pe-11",
+      "amount": 11.9,
+      "description": "Snacks",
+      "date": "2026-02-02"
+    },
+    {
+      "id": "tx-pe-12",
+      "amount": 76.4,
+      "description": "Monthly Subscription",
+      "date": "2026-02-05"
+    }
+  ],
+  "elek-n3lk-4m3lk4": [
+    {
+      "id": "tx-bo-01",
+      "amount": 21.88,
+      "description": "Team Hoodie Order",
+      "date": "2026-01-02"
+    },
+    {
+      "id": "tx-bo-02",
+      "amount": 533.48,
+      "description": "Client Demo Smartphone",
+      "date": "2026-01-04"
+    },
+    {
+      "id": "tx-bo-03",
+      "amount": 2.58,
+      "description": "Office Pantry Chocolate",
+      "date": "2026-01-06"
+    },
+    {
+      "id": "tx-bo-04",
+      "amount": -100.0,
+      "description": "Smartphone Return Credit",
+      "date": "2026-01-08"
+    },
+    {
+      "id": "tx-bo-05",
+      "amount": 67.2,
+      "description": "Printing Supplies",
+      "date": "2026-01-10"
+    },
+    {
+      "id": "tx-bo-06",
+      "amount": 148.9,
+      "description": "Client Lunch",
+      "date": "2026-01-12"
+    },
+    {
+      "id": "tx-bo-07",
+      "amount": 39.5,
+      "description": "Taxi to Meeting",
+      "date": "2026-01-14"
+    },
+    {
+      "id": "tx-bo-08",
+      "amount": 219.0,
+      "description": "Cloud Service Add-on",
+      "date": "2026-01-16"
+    },
+    {
+      "id": "tx-bo-09",
+      "amount": 84.25,
+      "description": "Office Stationery",
+      "date": "2026-01-18"
+    },
+    {
+      "id": "tx-bo-10",
+      "amount": 16.75,
+      "description": "Coffee for Workshop",
+      "date": "2026-01-20"
+    },
+    {
+      "id": "tx-bo-11",
+      "amount": 402.0,
+      "description": "Prototype Device",
+      "date": "2026-01-22"
+    },
+    {
+      "id": "tx-bo-12",
+      "amount": -42.0,
+      "description": "Hotel Adjustment Credit",
+      "date": "2026-01-24"
+    },
+    {
+      "id": "tx-bo-13",
+      "amount": 73.4,
+      "description": "Team Dinner",
+      "date": "2026-01-26"
+    },
+    {
+      "id": "tx-bo-14",
+      "amount": 129.6,
+      "description": "Video Conferencing License",
+      "date": "2026-01-28"
+    },
+    {
+      "id": "tx-bo-15",
+      "amount": 58.1,
+      "description": "Courier Charges",
+      "date": "2026-01-30"
+    },
+    {
+      "id": "tx-bo-16",
+      "amount": 260.0,
+      "description": "Advertising Spend",
+      "date": "2026-02-01"
+    },
+    {
+      "id": "tx-bo-17",
+      "amount": 44.3,
+      "description": "Parking Fees",
+      "date": "2026-02-03"
+    },
+    {
+      "id": "tx-bo-18",
+      "amount": 311.8,
+      "description": "Conference Tickets",
+      "date": "2026-02-05"
+    },
+    {
+      "id": "tx-bo-19",
+      "amount": -63.9,
+      "description": "Duplicate Charge Reversal",
+      "date": "2026-02-07"
+    },
+    {
+      "id": "tx-bo-20",
+      "amount": 97.45,
+      "description": "Office Snacks Restock",
+      "date": "2026-02-09"
+    }
+  ],
+  "lkmfkl-mlfkm-dlkff": [
+    {
+      "id": "tx-tl-01",
+      "amount": 76.2,
+      "description": "City Rail Pass",
+      "date": "2026-01-05"
+    },
+    {
+      "id": "tx-tl-02",
+      "amount": 14.99,
+      "description": "Museum Entry Ticket",
+      "date": "2026-01-08"
+    },
+    {
+      "id": "tx-tl-03",
+      "amount": 199.0,
+      "description": "Weekend Cabin Deposit",
+      "date": "2026-01-11"
+    },
+    {
+      "id": "tx-tl-04",
+      "amount": 52.4,
+      "description": "Airport Shuttle",
+      "date": "2026-01-14"
+    },
+    {
+      "id": "tx-tl-05",
+      "amount": 88.3,
+      "description": "Hotel Breakfast",
+      "date": "2026-01-17"
+    },
+    {
+      "id": "tx-tl-06",
+      "amount": -24.0,
+      "description": "Ticketing Adjustment",
+      "date": "2026-01-20"
+    },
+    {
+      "id": "tx-tl-07",
+      "amount": 137.75,
+      "description": "Mountain Tour",
+      "date": "2026-01-23"
+    },
+    {
+      "id": "tx-tl-08",
+      "amount": 34.6,
+      "description": "Local Transit",
+      "date": "2026-01-26"
+    },
+    {
+      "id": "tx-tl-09",
+      "amount": 63.25,
+      "description": "Travel Insurance",
+      "date": "2026-01-29"
+    },
+    {
+      "id": "tx-tl-10",
+      "amount": 28.4,
+      "description": "Roaming Pack",
+      "date": "2026-02-01"
+    },
+    {
+      "id": "tx-tl-11",
+      "amount": 111.2,
+      "description": "City Explorer Pass",
+      "date": "2026-02-04"
+    },
+    {
+      "id": "tx-tl-12",
+      "amount": 46.8,
+      "description": "Souvenirs",
+      "date": "2026-02-07"
+    }
+  ],
+  "hmfm-43kd-98pl1": [
+    {
+      "id": "tx-hf-01",
+      "amount": 84.6,
+      "description": "Grocery Delivery",
+      "date": "2026-01-04"
+    },
+    {
+      "id": "tx-hf-02",
+      "amount": 47.25,
+      "description": "School Supplies",
+      "date": "2026-01-07"
+    },
+    {
+      "id": "tx-hf-03",
+      "amount": 19.99,
+      "description": "Streaming Bundle",
+      "date": "2026-01-10"
+    },
+    {
+      "id": "tx-hf-04",
+      "amount": 132.4,
+      "description": "Electric Bill",
+      "date": "2026-01-13"
+    },
+    {
+      "id": "tx-hf-05",
+      "amount": 210.0,
+      "description": "Furniture Repair",
+      "date": "2026-01-16"
+    },
+    {
+      "id": "tx-hf-06",
+      "amount": -15.0,
+      "description": "Cashback Adjustment",
+      "date": "2026-01-19"
+    },
+    {
+      "id": "tx-hf-07",
+      "amount": 58.7,
+      "description": "Pediatric Visit",
+      "date": "2026-01-22"
+    },
+    {
+      "id": "tx-hf-08",
+      "amount": 96.35,
+      "description": "Weekend Supermarket",
+      "date": "2026-01-25"
+    },
+    {
+      "id": "tx-hf-09",
+      "amount": 41.8,
+      "description": "Childcare Supplies",
+      "date": "2026-01-28"
+    },
+    {
+      "id": "tx-hf-10",
+      "amount": 63.2,
+      "description": "Water Bill",
+      "date": "2026-01-31"
+    },
+    {
+      "id": "tx-hf-11",
+      "amount": 149.9,
+      "description": "Kitchen Appliance Installment",
+      "date": "2026-02-03"
+    },
+    {
+      "id": "tx-hf-12",
+      "amount": -22.5,
+      "description": "Grocery Return Credit",
+      "date": "2026-02-06"
+    }
+  ],
+  "fitn-9z12-ptx77": [
+    {
+      "id": "tx-fw-01",
+      "amount": 39.99,
+      "description": "Gym Membership",
+      "date": "2026-01-03"
+    },
+    {
+      "id": "tx-fw-02",
+      "amount": 54.2,
+      "description": "Protein Powder",
+      "date": "2026-01-06"
+    },
+    {
+      "id": "tx-fw-03",
+      "amount": 72.0,
+      "description": "Yoga Class Pack",
+      "date": "2026-01-09"
+    },
+    {
+      "id": "tx-fw-04",
+      "amount": 129.5,
+      "description": "Running Shoes",
+      "date": "2026-01-12"
+    },
+    {
+      "id": "tx-fw-05",
+      "amount": 48.0,
+      "description": "Sports Massage",
+      "date": "2026-01-15"
+    },
+    {
+      "id": "tx-fw-06",
+      "amount": -18.0,
+      "description": "Supplement Refund",
+      "date": "2026-01-18"
+    },
+    {
+      "id": "tx-fw-07",
+      "amount": 36.4,
+      "description": "Cycle Service",
+      "date": "2026-01-21"
+    },
+    {
+      "id": "tx-fw-08",
+      "amount": 12.99,
+      "description": "Health App Subscription",
+      "date": "2026-01-24"
+    },
+    {
+      "id": "tx-fw-09",
+      "amount": 95.0,
+      "description": "Marathon Registration",
+      "date": "2026-01-27"
+    },
+    {
+      "id": "tx-fw-10",
+      "amount": 24.6,
+      "description": "Smartwatch Strap",
+      "date": "2026-01-30"
+    },
+    {
+      "id": "tx-fw-11",
+      "amount": 28.0,
+      "description": "Tennis Court Booking",
+      "date": "2026-02-02"
+    },
+    {
+      "id": "tx-fw-12",
+      "amount": 61.5,
+      "description": "Nutrition Consultation",
+      "date": "2026-02-05"
+    }
+  ],
+  "lrn8-qa11-subs5": [
+    {
+      "id": "tx-ls-01",
+      "amount": 29.0,
+      "description": "Online Course Platform",
+      "date": "2026-01-02"
+    },
+    {
+      "id": "tx-ls-02",
+      "amount": 9.99,
+      "description": "Cloud Storage Plan",
+      "date": "2026-01-05"
+    },
+    {
+      "id": "tx-ls-03",
+      "amount": 15.0,
+      "description": "Design Tool Subscription",
+      "date": "2026-01-08"
+    },
+    {
+      "id": "tx-ls-04",
+      "amount": 89.0,
+      "description": "Language App Annual",
+      "date": "2026-01-11"
+    },
+    {
+      "id": "tx-ls-05",
+      "amount": 42.7,
+      "description": "Technical Ebook Bundle",
+      "date": "2026-01-14"
+    },
+    {
+      "id": "tx-ls-06",
+      "amount": -12.99,
+      "description": "Duplicate Subscription Reversal",
+      "date": "2026-01-17"
+    },
+    {
+      "id": "tx-ls-07",
+      "amount": 180.0,
+      "description": "Certification Exam Fee",
+      "date": "2026-01-20"
+    },
+    {
+      "id": "tx-ls-08",
+      "amount": 6.5,
+      "description": "Newsletter Subscription",
+      "date": "2026-01-23"
+    },
+    {
+      "id": "tx-ls-09",
+      "amount": 74.0,
+      "description": "Coding Workshop",
+      "date": "2026-01-26"
+    },
+    {
+      "id": "tx-ls-10",
+      "amount": 17.8,
+      "description": "Domain Renewal",
+      "date": "2026-01-29"
+    },
+    {
+      "id": "tx-ls-11",
+      "amount": 24.0,
+      "description": "Video Training Library",
+      "date": "2026-02-01"
+    },
+    {
+      "id": "tx-ls-12",
+      "amount": -35.0,
+      "description": "Scholarship Credit",
+      "date": "2026-02-04"
+    }
+  ]
+}

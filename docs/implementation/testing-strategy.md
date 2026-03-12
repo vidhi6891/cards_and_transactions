@@ -1,31 +1,68 @@
 # Testing Strategy
 
-The test suite is layered by risk and feedback speed.
+Testing is layered so we get fast feedback and strong confidence.
 
-## Unit (Vitest)
+## Quality goals
 
-- Scope:
-  - Pure helpers/formatters/filter logic in `src/features/cardsOverview/utils/*.unit.test.ts`.
-  - Filter form behavior in `src/features/cardsOverview/hooks/useTransactionFilterForm.unit.test.ts`.
-- Why:
-  - Fast, deterministic coverage for business logic and edge cases.
+- Catch logic regressions early.
+- Verify feature behavior across real async flows.
+- Validate key user journeys in a real browser.
+- Catch unintended UI changes in important screens.
 
-## Integration (Testing Library + Vitest)
+## Layered strategy
 
-- Scope:
-  - `src/features/cardsOverview/components/page/CardsOverview.integration.test.tsx`.
-- Why:
-  - Validates composed behavior across async loading, filtering, and UI state transitions.
+### Unit layer
 
-## E2E (Playwright)
+- Purpose:
+  - Validate pure logic and edge cases.
+- Benefits:
+  - Fastest feedback and low maintenance.
+- Typical targets:
+  - Filtering, summaries, formatting, and export rules.
+- Tools:
+  - `Vitest` (direct function and hook-focused tests).
 
-- Scope:
-  - Functional flows: `tests/e2e/cards-overview.spec.ts`.
-  - Visual baselines: `tests/e2e/cards-overview.visual.spec.ts`.
-- Why:
-  - Confirms browser-level behavior (keyboard interaction, CSV export flow, key layout states).
+### Integration layer
 
-## Tradeoffs
+- Purpose:
+  - Validate behavior across composed UI and async state transitions.
+- Benefits:
+  - Catches bugs that unit tests often miss.
+- Typical targets:
+  - Load/error states, filter apply/reset, section interaction behavior.
+- Tools:
+  - `Vitest` + `@testing-library/react`.
+- Main scope:
+  - `CardsOverview.integration.test.tsx` for end-to-end feature composition inside React.
 
-- Integration/E2E prioritize user-visible behavior over implementation details.
-- Visual snapshots are intentionally limited to key states to reduce baseline churn.
+### E2E layer
+
+- Purpose:
+  - Validate critical user flows in a real browser.
+- Benefits:
+  - Catches real interaction and environment issues.
+- Typical targets:
+  - Card selection, filtering flows, export, keyboard paths.
+- Tools:
+  - `Playwright`.
+- Main specs:
+  - `tests/e2e/cards-overview.spec.ts`.
+
+### Visual regression layer
+
+- Purpose:
+  - Protect key screens from unintended visual drift.
+- Benefits:
+  - Fast signal for UI regressions when kept focused.
+- Typical targets:
+  - Default state plus one or two important filtered states.
+- Tools:
+  - `Playwright` screenshot assertions.
+- Main specs:
+  - `tests/e2e/cards-overview.visual.spec.ts`.
+
+## Tradeoffs and policy
+
+- Unit tests give speed; integration and e2e give confidence.
+- Visual snapshots are intentionally limited to reduce noisy baseline churn.
+- Assertions focus on user-visible outcomes, not internal implementation details.

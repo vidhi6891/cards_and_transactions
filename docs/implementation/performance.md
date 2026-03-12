@@ -1,17 +1,34 @@
 # Performance Considerations
 
-## Current decisions
+Performance is treated as a core product quality concern.
 
-- Debounced filter commits (`useDebounceValue`) to reduce request churn during typing.
-- Request cancellation (`AbortController` in `useCardsOverview`) to prevent stale response commits.
-- Targeted memoization for derived values (selected card lookup, active filters, summary/theme maps).
-- Stale-while-refresh rendering to keep previous rows visible while next results are loading.
+## Architecture objectives
 
-## UX impact
+- Keep filtering interactions smooth.
+- Reduce layout shifts during loading and updates.
+- Prevent stale async responses from overwriting newer state.
+- Keep a clear path to scale beyond in-memory data.
 
-- Reduces perceived latency and avoids large layout shifts on frequent filter updates.
+## Current strategy
 
-## Limits and next step
+- Controlled request cadence:
+  - Filter input uses a draft model and `250ms` debounce to avoid request bursts while typing.
+- Safe async orchestration:
+  - In-flight requests use `AbortController`, so old responses cannot overwrite new state.
+- Perceived latency optimization:
+  - Existing results stay visible during refresh to avoid flashes and jumpiness.
+- Computational discipline:
+  - Derived state is memoized only where it gives clear value (selected card, summaries, theme maps).
 
-- Current filtering/sorting is client-side over in-memory data.
-- For scale, move filtering/sorting/pagination server-side and add list virtualization.
+## Known constraints
+
+- Querying is client-side against static in-memory data.
+- Large datasets will increase client CPU and data transfer costs.
+- Sorting/filtering logic currently runs per request path on the client.
+
+## Scale roadmap
+
+- Move filtering/sorting/pagination to backend query endpoints.
+- Add virtualization/windowing for long transaction lists.
+- Add performance guardrails in CI (for example render and interaction budgets).
+- Add telemetry for request latency and client render hotspots.

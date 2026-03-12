@@ -1,72 +1,91 @@
 # Design Decisions
 
-This document captures intentional design choices and their tradeoffs.
+This document lists the main architecture choices for the feature.
+It focuses on decisions and tradeoffs, not low-level code details.
 
-## 1) API adapter layer over direct fetch in components/hooks
+## Decision criteria
 
-- Decision:
-  - All data access goes through `src/features/cardsOverview/api/cardsApi.ts` (`getCards`, `getTransactions`).
-- Why:
-  - Keeps React hooks/components focused on UI state, not transport details.
-  - Preserves a clean seam for switching from static JSON to real backend endpoints.
-- Tradeoffs:
-  - Adds an extra abstraction layer for a small app.
-  - Requires adapter tests to avoid regressions in filter/sort behavior.
+- Easy to maintain and extend.
+- Clear path from mock data to real backend.
+- Stable and predictable UX.
+- Accessibility, responsiveness, and testing treated as core quality needs.
 
-## 2) Debounced filter commit model (draft vs committed state)
+## D1. Feature-oriented modular architecture
 
 - Decision:
-  - `useTransactionFilterForm` keeps immediate local draft input and commits query/min/max after a debounce window (`250ms`).
-- Why:
-  - Prevents a request on every keystroke.
-  - Keeps typing responsive even when transaction requests are simulated with latency.
+  - Organize code by feature, with a small shared layer for common parts.
+- Rationale:
+  - Keeps feature logic, UI, and tests close together.
+  - Reduces coupling between unrelated areas.
 - Tradeoffs:
-  - Slight code complexity (draft synchronization + debounced commit guard).
-  - User-visible delay before results update.
-  - Needs clear reset behavior so draft and committed values cannot diverge.
+  - Needs team conventions so features stay consistent.
+  - Shared abstractions must be added carefully.
 
-## 3) Keep previous results visible while refreshing filters
+## D2. Stable data contract boundary
 
 - Decision:
-  - On filter changes, existing rows stay rendered while new data loads.
-- Why:
-  - Reduces visual jitter and large layout shifts.
-  - Preserves interaction continuity for keyboard and assistive-tech users.
+  - Keep data access separate from UI state and rendering logic.
+- Rationale:
+  - Makes moving from local JSON to real APIs easier.
+  - Keeps transport concerns (fetch, errors, latency) out of UI components.
 - Tradeoffs:
-  - UI can briefly show stale results while request is in flight.
-  - Requires explicit loading affordance to avoid ambiguity.
+  - Adds extra layers in a small project.
+  - Requires clear API contract ownership.
 
-## 4) Deterministic per-card color system (hash-based theme mapping)
+## D3. Tailwind for layout + CSS variables for dynamic theme values
 
 - Decision:
-  - Card colors are generated from `themeKey`/`id` via hash + slot allocation in `utils/theme.ts`, then exposed as CSS variables via `utils/themeStyles.ts`.
-- Why:
-  - Produces stable colors across sessions without manually curating palette entries.
-  - Scales better than index-based color assignment when cards are added/removed/reordered.
-  - Keeps cards and related transaction panels visually linked.
+  - Use Tailwind utilities for layout/responsiveness, and CSS variables for dynamic theme tokens.
+- Rationale:
+  - Fast updates for spacing, grid, and breakpoints.
+  - Better consistency across screens.
+  - Dynamic card colors can be applied without creating dynamic class names.
 - Tradeoffs:
-  - Generated hues can still feel close as card count grows.
-  - Algorithm complexity is higher than a static palette.
-  - True global uniqueness is bounded by theme slot capacity.
+  - Markup can get class-heavy.
+  - Styling is split between JSX classes and feature CSS variables.
 
-## 5) Tailwind + feature CSS variables hybrid styling
+## D4. Deterministic card theming
 
 - Decision:
-  - Layout and spacing rely on utility classes; feature-specific visual tokens/rings/surfaces are implemented via CSS variables in `cardsOverview.css`.
-- Why:
-  - Utility classes keep responsive structure fast to iterate.
-  - CSS variables make dynamic theming practical without runtime class generation.
+  - Generate card theme tokens deterministically from card identity.
+- Rationale:
+  - Helps users quickly connect cards with related transactions.
+  - Avoids index-based color mapping that breaks when order changes.
 - Tradeoffs:
-  - Styling responsibility is split across JSX + CSS file.
-  - Requires stronger naming discipline for custom CSS variables.
+  - Similar-looking colors can still happen as cards increase.
+  - Theme generation logic in frontend adds complexity.
+- Future direction:
+  - Move theme tokens to the backend so color identity is canonical across web/mobile clients.
 
-## 6) Abortable async flows in hooks
+## D5. Debounced filter interaction model
 
 - Decision:
-  - `AbortController` is used for cards/transactions requests in `useCardsOverview`.
-- Why:
-  - Prevents obsolete responses from overwriting newer state.
-  - Avoids React state updates after effect cleanup/unmount.
+  - Keep local draft inputs and apply query/min/max filters with debounce (`250ms`).
+- Rationale:
+  - Reduces request bursts while typing.
+  - Keeps typing smooth under latency.
 - Tradeoffs:
-  - Additional guard code around aborted states.
-  - More edge cases in tests for loading/error transitions.
+  - Results update with a small delay.
+  - Requires sync logic between draft values and applied filter state.
+
+## D6. Async safety + perceived performance strategy
+
+- Decision:
+  - Use cancelable requests and keep current results visible during refresh.
+- Rationale:
+  - Prevents stale responses from overwriting newer state.
+  - Reduces layout jumps and preserves user context during frequent changes.
+- Tradeoffs:
+  - Users briefly see old data while refresh is in progress.
+  - Requires clear loading signals to avoid confusion.
+
+## D7. Accessibility and responsiveness as architecture constraints
+
+- Decision:
+  - Treat accessibility, responsiveness, and testing as required architecture constraints.
+- Rationale:
+  - Avoids expensive retrofit work later.
+  - Increases confidence across devices, input methods, and release cycles.
+- Tradeoffs:
+  - Higher upfront effort.
+  - More ongoing QA and documentation maintenance.

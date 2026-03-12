@@ -90,7 +90,7 @@ describe("CardsOverview integration", () => {
   });
 
   test("shows cards error state when cards request fails", async () => {
-    const originalFetch = global.fetch;
+    const originalFetch = globalThis.fetch;
     vi.stubGlobal(
       "fetch",
       vi.fn(async (input: RequestInfo | URL, init?: RequestInit) => {
@@ -112,7 +112,7 @@ describe("CardsOverview integration", () => {
   });
 
   test("shows transactions error state when transactions request fails", async () => {
-    const originalFetch = global.fetch;
+    const originalFetch = globalThis.fetch;
     vi.stubGlobal(
       "fetch",
       vi.fn(async (input: RequestInfo | URL, init?: RequestInit) => {

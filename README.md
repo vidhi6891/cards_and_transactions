@@ -30,7 +30,7 @@ React + TypeScript application for rendering mocked cards and transactions, with
 - `src/shared/hooks/` shared composables
 - `src/shared/utils/` shared utilities
 - `tests/e2e/` Playwright flows + visual regression tests
-- `docs/implementation/` design/testing/performance/a11y/responsiveness/code-structure docs
+- `docs/implementation/` design/testing/performance/a11y/responsiveness docs
 
 ## Data Endpoints
 
@@ -38,6 +38,33 @@ The app intentionally uses static, mocked endpoints:
 
 - `GET /data/cards.json`
 - `GET /data/transactions.json`
+
+## Implemented Features
+
+- Card overview with selectable cards and deterministic per-card theming.
+- Transactions view linked to the selected card, including themed styling consistency.
+- Transaction filtering by search text, minimum amount, maximum amount, and sort order.
+- Debounced filter application (`250ms`) for smoother typing and lower request churn.
+- Active filter chips with per-chip removal and `Clear all`.
+- Transaction summary tiles (count, total spend, credits/refunds, net amount).
+- CSV export for the currently filtered transaction result set.
+- Robust async state handling with loading, error, and cancelable request behavior.
+- Accessible interactions: keyboard support, semantic structure, and screen-reader live announcements for loading/result changes.
+- Responsive mobile-first layout with stable containers and scrollable dense lists.
+
+## Implemented Tests
+
+- Unit tests (`Vitest`):
+  - utility logic (`helpers`, `announcements`, `theme`, `transaction export`, `filter form helpers`),
+  - hook behavior (`useTransactionFilterForm`).
+- Integration tests (`Vitest` + Testing Library):
+  - feature-level behavior in `CardsOverview.integration.test.tsx` (loading/error states, card switching, filtering, chips, export button states).
+- E2E tests (`Playwright`):
+  - core user flows in `tests/e2e/cards-overview.spec.ts` (real browser interactions).
+- Visual regression tests (`Playwright` screenshots):
+  - key layout states in `tests/e2e/cards-overview.visual.spec.ts`.
+- App-level smoke:
+  - baseline render test in `src/App.test.tsx`.
 
 ## Project Run Guide
 
@@ -85,25 +112,23 @@ npm run test:e2e -- tests/e2e/cards-overview.visual.spec.ts --update-snapshots
 
 ## Assumptions and Tradeoffs
 
-- Data source boundary:
-  - Local JSON is consumed through an API adapter (`cardsApi.ts`) to preserve a backend-compatible contract.
-  - Tradeoff: adds abstraction overhead for a small assignment.
-- Filtering strategy:
-  - Filtering/sorting is client-side to keep the feature self-contained and fast to iterate.
-  - Tradeoff: this does not represent production-scale behavior for large datasets.
-- Input responsiveness vs immediacy:
-  - Text/amount filters use debounced commits to prevent request churn and reduce UI jank while typing.
-  - Tradeoff: results are intentionally not instantaneous on every keystroke.
-- Theming model:
-  - Card/transaction colors are generated deterministically from card identity instead of manually curated per-card palettes.
-  - Tradeoff: near-color collisions are still possible as card count grows.
-- Test depth:
-  - Visual regression coverage focuses on critical states only.
-  - Tradeoff: edge-case layout regressions outside those baselines may not be caught automatically.
+- API boundary first: even with local JSON data, the app goes through an API adapter to keep a stable contract for future backend migration.
+  - Tradeoff: slightly more code for this assignment size.
+- Client-side filtering/sorting: current filtering is applied in the frontend for fast iteration and simpler local setup.
+  - Tradeoff: this model is not ideal for large datasets.
+- Debounced filter model: text and amount inputs use draft state plus a `250ms` debounce before applying.
+  - Tradeoff: smoother typing, but result updates are not instant.
+- Async safety and UX stability: requests are cancelable and the UI keeps current rows visible while refresh is in progress.
+  - Tradeoff: users can briefly see stale data until the next response arrives.
+- Client-side theming: card/transaction colors are generated deterministically from card identity to keep visual mapping stable.
+  - Tradeoff: near-color collisions are still possible at higher card counts.
+- Visual test scope: visual snapshots are focused on key states only.
+  - Tradeoff: lower coverage of rare layout combinations.
 
 ## What I Would Improve With More Time
 
 - Move filtering/sorting/pagination to the backend for large datasets and predictable latency.
+- Move theming to backend-owned design tokens so each card has one canonical color identity across clients and the frontend no longer owns color-generation logic.
 - Add URL-synced filter state for shareable views and better back/forward navigation.
 - Extend filtering with date range + transaction type + saved filter presets.
 - Improve export for larger datasets (server-generated CSV, background job, status feedback).
@@ -121,4 +146,3 @@ Detailed design and engineering notes:
 - [Performance considerations](./docs/implementation/performance.md)
 - [Accessibility](./docs/implementation/accessibility.md)
 - [Responsiveness](./docs/implementation/responsiveness.md)
-- [Code structure](./docs/implementation/code-structure.md)

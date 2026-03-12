@@ -20,11 +20,11 @@ React + TypeScript application for rendering mocked cards and transactions, with
 
 ## Why This Architecture
 
-- API-first frontend shape: static JSON is accessed through `api/cardsApi.ts`, so swapping to real HTTP endpoints is straightforward.
-- Feature-first module: `src/features/cardsOverview` keeps domain logic cohesive and discoverable.
-- Shared UI primitives: `src/shared/ui` avoids duplicating behavior and keeps interactions consistent.
-- Mobile-first and accessible by design: responsive section composition, keyboard support, and live announcements are built into core flows.
-- Layered testing strategy: unit, integration, e2e, and visual tests provide balanced confidence.
+- API-first frontend shape: static JSON is accessed through `api/cardsApi.ts`, so swapping to real HTTP endpoints is straightforward ([Design decision D2](./docs/implementation/design-decisions.md#d2-stable-data-contract-boundary)).
+- Feature-first module: `src/features/cardsOverview` keeps domain logic cohesive and discoverable ([Design decision D1](./docs/implementation/design-decisions.md#d1-feature-oriented-modular-architecture)).
+- Shared UI primitives: `src/shared/ui` avoids duplicating behavior and keeps interactions consistent ([Design decision D1](./docs/implementation/design-decisions.md#d1-feature-oriented-modular-architecture)).
+- Mobile-first and accessible by design: responsive section composition, keyboard support, and live announcements are built into core flows ([Design decision D7](./docs/implementation/design-decisions.md#d7-accessibility-and-responsiveness-as-architecture-constraints)).
+- Layered testing strategy: unit, integration, e2e, and visual tests provide balanced confidence ([Design decision D7](./docs/implementation/design-decisions.md#d7-accessibility-and-responsiveness-as-architecture-constraints)).
 
 ## Folder Overview
 
@@ -120,17 +120,17 @@ npm run test:e2e -- tests/e2e/cards-overview.visual.spec.ts --update-snapshots
 
 ## Assumptions and Tradeoffs
 
-- API boundary first: even with local JSON data, the app goes through an API adapter to keep a stable contract for future backend migration.
+- API boundary first: even with local JSON data, the app goes through an API adapter to keep a stable contract for future backend migration ([Design decision D2](./docs/implementation/design-decisions.md#d2-stable-data-contract-boundary)).
   - Tradeoff: slightly more code for this assignment size.
-- Client-side filtering/sorting: current filtering is applied in the frontend for fast iteration and simpler local setup.
+- Client-side filtering/sorting: current filtering is applied in the frontend for fast iteration and simpler local setup ([Design decision D5](./docs/implementation/design-decisions.md#d5-debounced-filter-interaction-model)).
   - Tradeoff: this model is not ideal for large datasets.
-- Debounced filter model: text and amount inputs use draft state plus a `250ms` debounce before applying.
+- Debounced filter model: text and amount inputs use draft state plus a `250ms` debounce before applying ([Design decision D5](./docs/implementation/design-decisions.md#d5-debounced-filter-interaction-model)).
   - Tradeoff: smoother typing, but result updates are not instant.
-- Async safety and UX stability: requests are cancelable and the UI keeps current rows visible while refresh is in progress.
+- Async safety and UX stability: requests are cancelable and the UI keeps current rows visible while refresh is in progress ([Design decision D6](./docs/implementation/design-decisions.md#d6-async-safety-and-perceived-performance-strategy)).
   - Tradeoff: users can briefly see stale data until the next response arrives.
-- Client-side theming: card/transaction colors are generated deterministically from card identity to keep visual mapping stable.
+- Client-side theming: card/transaction colors are generated deterministically from card identity to keep visual mapping stable ([Design decision D4](./docs/implementation/design-decisions.md#d4-deterministic-card-theming)).
   - Tradeoff: near-color collisions are still possible at higher card counts.
-- Visual test scope: visual snapshots are focused on key states only.
+- Visual test scope: visual snapshots are focused on key states only ([Design decision D7](./docs/implementation/design-decisions.md#d7-accessibility-and-responsiveness-as-architecture-constraints)).
   - Tradeoff: lower coverage of rare layout combinations.
 
 ## What I Would Improve With More Time
@@ -139,6 +139,7 @@ npm run test:e2e -- tests/e2e/cards-overview.visual.spec.ts --update-snapshots
 - Move theming to backend-owned design tokens so each card has one canonical color identity across clients and the frontend no longer owns color-generation logic.
 - Add URL-synced filter state for shareable views and better back/forward navigation.
 - Extend filtering with date range + transaction type + saved filter presets.
+- Add explicit filter validation (invalid numeric input, min/max conflicts) with inline and screen-reader-friendly error messaging.
 - Improve export for larger datasets (server-generated CSV, background job, status feedback).
 - Add richer transaction insights (categories, recurring detection, spend trends).
 - Harden reliability with structured error taxonomy, retries/backoff, and request telemetry.

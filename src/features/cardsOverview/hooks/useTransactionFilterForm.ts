@@ -37,9 +37,11 @@ export function useTransactionFilterForm({
   debounceMs = 250,
   scopeKey,
 }: useTransactionFilterFormArgs): useTransactionFilterFormResult {
+  // Local draft keeps typing immediate; parent `values` are the applied filters.
   const [draft, setDraft] = useState<DraftFilters>(() =>
     toDraftFilters(values),
   );
+  // Tracks latest draft for scope/value sync checks without expanding effect deps.
   const draftRef = useRef<DraftFilters>(draft);
 
   // Prevent stale debounced values from being committed after external resets/scope changes.
@@ -60,6 +62,7 @@ export function useTransactionFilterForm({
   }, [draft.query, draft.minAmountInput, draft.maxAmountInput]);
 
   useEffect(() => {
+    // External updates (card switch/reset/parent changes) should win over local draft.
     const nextDraft = toDraftFilters(values);
     if (areDraftFiltersEqual(draftRef.current, nextDraft)) {
       return;
@@ -70,6 +73,7 @@ export function useTransactionFilterForm({
   }, [scopeKey, values.query, values.minAmountInput, values.maxAmountInput]);
 
   useEffect(() => {
+    // Guard against old debounced values being re-committed after an external reset/scope change.
     const debouncedMatchesValues =
       debouncedQuery === values.query &&
       debouncedMinAmountInput === values.minAmountInput &&
@@ -140,6 +144,7 @@ export function useTransactionFilterForm({
   );
 
   const handleReset = useCallback(() => {
+    // Reset both local draft and applied values, while blocking stale pending commits.
     skipDebouncedCommitRef.current = true;
     setDraft(EMPTY_DRAFT);
     onReset();

@@ -24,8 +24,8 @@ export function FiltersSection({
       </h2>
 
       <TransactionFilters
-        key={scopeKey ?? "no-card-scope"}
         values={values}
+        // Scope ensures draft sync logic in the form controller reacts to card-context changes.
         scopeKey={scopeKey}
         disabled={disabled}
         onChange={onChange}

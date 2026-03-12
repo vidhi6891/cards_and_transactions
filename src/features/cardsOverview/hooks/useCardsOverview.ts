@@ -154,6 +154,7 @@ export function useCardsOverview(): CardsOverviewState {
     }
 
     setSelectedCardId(cardId);
+    // Filters are card-scoped to avoid carrying one card's context into another.
     setTransactionFilters({ ...DEFAULT_TRANSACTION_FILTERS });
   }, []);
 

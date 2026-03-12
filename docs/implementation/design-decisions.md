@@ -60,15 +60,19 @@ It focuses on decisions and tradeoffs, not low-level code details.
 ## D5. Debounced filter interaction model
 
 - Decision:
-  - Keep local draft inputs and apply query/min/max filters with debounce (`250ms`).
+  - Use a two-layer filter model: immediate local draft state for form inputs, and debounced applied state (`250ms`) for query/min/max; sort is applied immediately.
+- Flow:
+  - Input updates draft -> debounced patch updates applied filters -> applied filters trigger fetch -> chips/summary/list render from applied state.
 - Rationale:
-  - Reduces request bursts while typing.
-  - Keeps typing smooth under latency.
+  - Keeps typing responsive and avoids request-per-keystroke churn.
+  - Keeps displayed results aligned with the currently applied filters.
 - Tradeoffs:
-  - Results update with a small delay.
-  - Requires sync logic between draft values and applied filter state.
+  - Introduces a small delay before results update.
+  - Requires extra coordination for reset/scope changes and stale debounce guards.
+- Future hardening:
+  - Add explicit filter validation (invalid numeric input, min/max conflicts) with inline and assistive-technology announcements.
 
-## D6. Async safety + perceived performance strategy
+## D6. Async safety and perceived performance strategy
 
 - Decision:
   - Use cancelable requests and keep current results visible during refresh.
